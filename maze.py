@@ -24,7 +24,13 @@ class Maze:
         self._create_cells()
     
     def _create_cells(self):
-        pass
+        for i in range(self._num_cols):
+            col_cells = []
+            for j in range(self._num_rows):
+                new_cell = Cell(self._win)
+                col_cells.append(new_cell)
+            self._cells.append(col_cells)
+
 
     def _draw_cell(self,i,j):
         pass
@@ -32,3 +38,7 @@ class Maze:
     def _animate(self):
         self._win.redraw()
         time.sleep(0.05)
+
+if __name__ == "__main__":
+    maze = Maze(0,0,10,10,50,50,None)
+    maze._create_cells()
