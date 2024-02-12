@@ -29,5 +29,19 @@ class Tests(unittest.TestCase):
             num_rows
         )
     
+    def test_maze_create_large(self):
+        num_cols = 40
+        num_rows = 25
+        m1 = Maze(0,0,num_rows,num_cols,20,20)
+        self.assertEqual(
+            len(m1._cells),
+            num_cols
+        )
+        self.assertEqual(
+            len(m1._cells[0]),
+            num_rows
+        )
+    
+    
 if __name__ == "__main__":
     unittest.main()
