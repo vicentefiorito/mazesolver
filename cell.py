@@ -14,6 +14,8 @@ class Cell:
     
     # draws a line onto the canvas
     def draw(self,x1,y1,x2,y2):
+        if self._win is None:
+            return
         self._x1 = x1
         self._y1 = y1
         self._x2 = x2
@@ -23,22 +25,34 @@ class Cell:
         if self.has_left_wall:
             line = Line(Point(x1,y1), Point(x1,y2))
             self._win.draw_line(line)
+        else:
+            line = Line(Point(x1,y1), Point(x1,y2))
+            self._win.draw_line(line,"white")
         
         # if cell has top wall
         if self.has_top_wall:
             line = Line(Point(x1,y1), Point(x2,y1))
             self._win.draw_line(line)
+        else:
+            line = Line(Point(x1,y1), Point(x2,y1))
+            self._win.draw_line(line,"white")
         
         # if cell has right wall
         if self.has_right_wall:
             line = Line(Point(x2,y1), Point(x2,y2))
             self._win.draw_line(line)
+        else:
+            line = Line(Point(x2,y1), Point(x2,y2))
+            self._win.draw_line(line,"white")
         
         # if cell has bottom wall
         if self.has_bottom_wall:
             line = Line(Point(x1,y2), Point(x2,y2))
             self._win.draw_line(line)
-    
+        else:
+            line = Line(Point(x1,y2), Point(x2,y2))
+            self._win.draw_line(line,"white")
+        
     # draws a path between two cells
     def draw_move(self,to_cell,undo=False):
         if self._win is None:
