@@ -5,10 +5,10 @@ from maze import Maze
 def main():
     # implementing the Maze
     num_cols = 12
-    num_rows = 4
+    num_rows = 16
     margin = 50
-    cell_x = 100
-    cell_y = 300
+    cell_x = (screen_x - 2 * margin) / num_cols
+    cell_y = (screen_y - 2 * margin) / num_rows
     screen_x = 1500
     screen_y= 800
 
