@@ -56,7 +56,13 @@ class Maze:
     def _animate(self):
         self._win.redraw()
         time.sleep(0.05)
-
-if __name__ == "__main__":
-    maze = Maze(0,0,10,10,50,50,None)
-    maze._create_cells()
+    
+    def _break_entrance_and_exit(self):
+        # reveals the entrance to the maze
+        self._cells[0][0].has_top_wall = False
+        # redraws the cell withouth the top wall
+        self._draw_cell(0,0)
+        # reveals the exit to the maze
+        self._cells[self._num_cols - 1][self._num_rows - 1].has_bottom_wall = False
+        # redraws the cell
+        self._draw_cell(self._num_cols - 1,self._num_rows - 1)
