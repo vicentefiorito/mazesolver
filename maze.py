@@ -134,3 +134,56 @@ class Maze:
         for i in range(self._num_cols):
             for j in range(self._num_rows):
                 self._cells[i][j].visited = False
+    
+    # solves the maze by calling the recursive helper method
+    def solve(self):
+       return self._solve_r(0,0)
+    
+    # helper method to recursively traverse the maze
+    def _solve_r(self,i,j):
+        self._animate()
+        # visits the current cell
+        self._cells[i][j].visited = True
+
+        # if the cell is the end cell, mazed solved, return True
+        if i == self._num_cols - 1 and j == self._num_rows - 1:
+            return True
+        
+        # moving left 
+        if i > 0 and not self._cells[i][j].has_left_wall and not self._cells[i - 1][j].visited:
+            self._cells[i][j].draw_move(self._cells[i-1][j])
+            # don't worry about the other directions if the cell drawing the move is the last cell
+            if self._solve_r((i-1),j):
+                return True
+            else:
+                self._cells[i][j].draw_move(self._cells[i-1][j],True)
+        
+        # moving right
+        if i < self._num_cols - 1 and not self._cells[i][j].has_right_wall and not self._cells[i + 1][j].visited:
+            self._cells[i][j].draw_move(self._cells[i+1][j])
+            # don't worry about the other directions if the cell drawing the move is the last cell
+            if self._solve_r((i+1),j):
+                return True
+            else:
+                self._cells[i][j].draw_move(self._cells[i+1][j],True)
+        
+        # moving up
+        if j > 0 and not self._cells[i][j].has_top_wall and not self._cells[i][j - 1].visited:
+            self._cells[i][j].draw_move(self._cells[i][j-1])
+            # don't worry about the other directions if the cell drawing the move is the last cell
+            if self._solve_r(i,(j - 1)):
+                return True
+            else:
+                self._cells[i][j].draw_move(self._cells[i][j - 1],True)
+        
+        # moving down
+        if j < self._num_rows - 1 and not self._cells[i][j].has_bottom_wall and not self._cells[i][j + 1].visited:
+            self._cells[i][j].draw_move(self._cells[i][j+1])
+            # don't worry about the other directions if the cell drawing the move is the last cell
+            if self._solve_r(i,(j + 1)):
+                return True
+            else:
+                self._cells[i][j].draw_move(self._cells[i][j + 1],True)
+        
+        # if none of the paths work, then we went the wrong way and need to return False
+        return False
