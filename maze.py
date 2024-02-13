@@ -108,22 +108,22 @@ class Maze:
             # right wall
             if next_index[0] == i + 1:
                 self._cells[i][j].has_right_wall = False
-                self._cells[next_index[0]][next_index[1]].has_left_wall = False
+                self._cells[i + 1][j].has_left_wall = False
             
             # left wall
             if next_index[0] == i - 1:
                 self._cells[i][j].has_left_wall = False
-                self._cells[next_index[0]][next_index[1]].has_right_wall = False
+                self._cells[i - 1][j].has_right_wall = False
             
             # top wall
             if next_index[1] == j - 1:
                 self._cells[i][j].has_top_wall = False
-                self._cells[next_index[0]][next_index[1]].has_bottom_wall = False
+                self._cells[i][j - 1].has_bottom_wall = False
             
             # bottom wall
             if next_index[1] == j + 1:
                 self._cells[i][j].has_bottom_wall = False
-                self._cells[next_index[0]][next_index[1]].has_top_wall = False
+                self._cells[i][j + 1].has_top_wall = False
 
             # recursively call the function
             self._break_walls_r(next_index[0],next_index[1])
